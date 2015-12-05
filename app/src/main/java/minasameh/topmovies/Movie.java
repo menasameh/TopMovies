@@ -2,7 +2,8 @@ package minasameh.topmovies;
 
 public class Movie {
     String name;
-    int year;
+    String releaseDate;
     String longDescription;
     String imageUri;
+    double rate;
 }

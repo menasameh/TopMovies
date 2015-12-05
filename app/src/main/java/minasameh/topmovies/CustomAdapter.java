@@ -11,11 +11,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CustomAdapter extends BaseAdapter {
     LayoutInflater mInflater;
     Context mContext;
-    ArrayList<Movie> mList;
+    public static ArrayList<Movie> mList;
 
     public CustomAdapter (Context context, ArrayList<Movie> list){
         mInflater = LayoutInflater.from(context);
@@ -28,7 +29,13 @@ public class CustomAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void addAll(ArrayList<Movie> m){
+    public void addAll(Movie[] m){
+        mList.addAll(Arrays.asList(m));
+        notifyDataSetChanged();
+    }
+
+    public void replace(ArrayList<Movie> m){
+        mList.clear();
         mList.addAll(m);
         notifyDataSetChanged();
     }
@@ -56,7 +63,7 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = mInflater.inflate(R.layout.grid_custom_item, parent,false);
+            view = mInflater.inflate(R.layout.grid_custom_item, null);
         } else {
             view = convertView;
         }
