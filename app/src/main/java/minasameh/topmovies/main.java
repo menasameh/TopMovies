@@ -6,12 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class main extends AppCompatActivity {
 
@@ -20,11 +18,10 @@ public class main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] array = {"item", "item", "item", "item", "item", "item", "item"};
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(array));
+
+        CustomAdapter adapter = new CustomAdapter(this, new ArrayList<Movie>());
 
         GridView grid = (GridView) findViewById(R.id.grid_view);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.grid_item, list);
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
