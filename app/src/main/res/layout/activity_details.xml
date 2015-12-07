@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="minasameh.topmovies.details">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_size"
+        android:id="@+id/movie_poster"
+        android:scaleType="centerCrop"
+        />
+
+<TextView
+    android:id="@+id/movie_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:background="#66000000"
+    android:layout_marginTop="@dimen/text_offset"
+    android:text="sdafg"
+    android:gravity="center"
+    android:textColor="#ffffff"
+    />
+    
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/image_size"
+        android:id="@+id/scrollView">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/date_rate"
+                android:baselineAligned="false"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/label_size"
+                        android:text="@string/movie_date"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="dfadf"
+                        android:textSize="@dimen/text_size"
+                        android:gravity="center"
+                        android:id="@+id/movie_date"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/label_size"
+                        android:text="@string/movie_rate"
+                        />
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/movie_rate"
+                        android:layout_gravity="center"
+                        android:stepSize="0.25" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/label_size"
+                android:text="@string/movie_description"
+                android:layout_below="@id/date_rate"
+                android:id="@+id/movie_description_label"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_below="@id/movie_description_label"
+                android:id="@+id/movie_description"
+                />
+
+        </RelativeLayout>
+        
+    </ScrollView>
+
+
+</RelativeLayout>

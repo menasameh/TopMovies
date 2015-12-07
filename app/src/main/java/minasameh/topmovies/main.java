@@ -1,5 +1,6 @@
 package minasameh.topmovies;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class main extends AppCompatActivity {
 
+    public static String PARCE = "parce";
     CustomAdapter adapter;
 
     @Override
@@ -38,8 +39,9 @@ public class main extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Toast.makeText(main.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(main.this, details.class);
+                i.putExtra(PARCE, (Movie)adapter.getItem(position));
+                startActivity(i);
             }
         });
         new getMoviesTask().execute();
@@ -55,11 +57,8 @@ public class main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
@@ -90,7 +89,7 @@ public class main extends AppCompatActivity {
                 m.name = MovieItem.getString(OWM_TITLE);
                 m.imageUri = baseURL+size+MovieItem.getString(OWM_POSTER);
                 m.longDescription = MovieItem.getString(OWM_OVERVIEW);
-                m.rate = MovieItem.getDouble(OWM_RATE);
+                m.rate = (float)MovieItem.getDouble(OWM_RATE);
                 m.releaseDate = MovieItem.getString(OWM_DATE);
                 list.add(m);
             }
