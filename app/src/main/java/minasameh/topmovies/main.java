@@ -1,6 +1,8 @@
 package minasameh.topmovies;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,12 +42,14 @@ public class main extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent i = new Intent(main.this, details.class);
-                i.putExtra(PARCE, (Movie)adapter.getItem(position));
+                i.putExtra(PARCE, (Movie) adapter.getItem(position));
                 startActivity(i);
             }
         });
         new getMoviesTask().execute();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,7 +61,10 @@ public class main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
+        if(id == R.id.action_settings){
+            startActivity(new Intent(this, Settings.class));
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
@@ -93,8 +100,6 @@ public class main extends AppCompatActivity {
                 m.releaseDate = MovieItem.getString(OWM_DATE);
                 list.add(m);
             }
-
-
             return list;
         }
 
@@ -116,8 +121,21 @@ public class main extends AppCompatActivity {
                 final String QUERY_PARAM = "sort_by";
                 final String APPID_PARAM = "api_key";
 
+                SharedPreferences settings = getSharedPreferences(Settings.PREFS_NAME, Context.MODE_PRIVATE);
+                int orderBy = settings.getInt(getString(R.string.Movies_order_key),
+                        Integer.parseInt(getString(R.string.Movies_order_default)));
+
+                String order;
+                if(orderBy == 0){
+                    order = "popularity.desc";
+                }
+                else{
+                    order = "vote_average.desc";
+                }
+
+
                 Uri builtUri = Uri.parse(Movies_BASE_URL).buildUpon()
-                        .appendQueryParameter(QUERY_PARAM, "popularity.desc")
+                        .appendQueryParameter(QUERY_PARAM, order)
                         .appendQueryParameter(APPID_PARAM, ApiKey)
                         .build();
 
@@ -167,13 +185,12 @@ public class main extends AppCompatActivity {
                 e.printStackTrace();
                 Log.e(LOG_TAG, "Error in parsing Json", e);
             }
-            return null;
+            return new ArrayList<>();
         }
 
         @Override
         protected void onPostExecute(ArrayList<Movie> s) {
             if(s!=null && s.size() > 0){
-                adapter.clear();
                 adapter.replace(s);
             }
         }

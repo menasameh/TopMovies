@@ -23,7 +23,7 @@
         android:layout_alignParentBottom="true"
         android:textSize="20sp"
         android:layout_margin="10dp"
-        android:background="#CCffffff"
+        android:background="#cc686868"
         />
     
 

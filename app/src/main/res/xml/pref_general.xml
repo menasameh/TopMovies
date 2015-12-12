@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ <ListPreference
+    android:key="@string/Movies_order_key"
+    android:title="@string/Movies_order_title"
+    android:defaultValue="@string/Movies_order_default"
+    android:entries="@array/Movies_order_values"
+    android:entryValues="@array/Movies_order_keys"
+     />
+</PreferenceScreen>

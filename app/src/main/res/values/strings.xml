@@ -7,4 +7,20 @@
     <string name="movie_description">Description :</string>
     <string name="movie_date">Release Date :</string>
     <string name="movie_rate">Rate :</string>
+    <string name="title_activity_settings">Settings</string>
+
+    //settings
+    <string name="Movies_order_key">movieOrder</string>
+    <string name="Movies_order_default">0</string>
+    <string name="Movies_order_title">Order By</string>
+    <string name="Movies_order_summary">order of movies</string>
+
+    <string-array name="Movies_order_values">
+        <item>most popular</item>
+        <item>highest rated</item>
+    </string-array>
+    <string-array name="Movies_order_keys">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
