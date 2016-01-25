@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_size"
         android:orientation="horizontal"
+        android:gravity="center"
+
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -17,28 +19,50 @@
             android:id="@+id/movie_poster"
             android:scaleType="fitCenter"
             android:layout_margin="10dp"
+            android:src="@mipmap/ic_launcher"
             />
-
-        <TextView
-            android:id="@+id/movie_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/label_size"
-            android:background="#66000000"
-            android:layout_marginTop="@dimen/text_offset"
-            android:layout_marginRight="10dp"
-            android:text="sdafg"
+            android:orientation="vertical"
+            android:id="@+id/date_rate"
             android:gravity="center"
-            android:textColor="#ffffff"
-            />
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <CheckBox
+                android:id="@+id/fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/starStyle"
+                />
+            <TextView
+                android:id="@+id/movie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/label_size"
+                android:text="sdafg"
+                />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="dfadf"
+                android:textSize="@dimen/text_size"
+                android:gravity="center"
+                android:id="@+id/movie_date"
+                />
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_rate"
+                android:layout_gravity="center"
+                android:stepSize="0.25" />
+        </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,62 +73,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/date_rate"
-                android:baselineAligned="false"
-                >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.5"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/label_size"
-                        android:text="@string/movie_date"
-                        />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="dfadf"
-                        android:textSize="@dimen/text_size"
-                        android:gravity="center"
-                        android:id="@+id/movie_date"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.5"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/label_size"
-                        android:text="@string/movie_rate"
-                        />
-
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/movie_rate"
-                        android:layout_gravity="center"
-                        android:stepSize="0.25" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/label_size"
                 android:text="@string/movie_description"
-                android:layout_below="@id/date_rate"
                 android:id="@+id/movie_description_label"
                 />
             <TextView
@@ -115,7 +89,48 @@
                 android:id="@+id/movie_description"
                 />
 
+            <TextView
+                android:id="@+id/trailer_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trailers"
+                android:textSize="@dimen/label_size"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/movie_description"
+                />
+
+            <ListView
+                android:id="@+id/trailers_listview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+
+                android:layout_below="@id/trailer_title"
+                >
+
+            </ListView>
+
+            <TextView
+                android:id="@+id/reviews_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reviews"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/label_size"
+                android:layout_below="@id/trailers_listview"
+                />
+
+            <ListView
+                android:id="@+id/reviews_listview"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/reviews_title"
+                >
+            </ListView>
+
         </RelativeLayout>
+
+
+
         
     </ScrollView>
 

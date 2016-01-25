@@ -1,40 +1,40 @@
-package minasameh.topmovies;
+package minasameh.topmovies.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CustomAdapter extends BaseAdapter {
+import minasameh.topmovies.R;
+import minasameh.topmovies.model.trailer;
+
+public class TrailerCustomAdapter extends BaseAdapter {
     LayoutInflater mInflater;
     Context mContext;
-    public static ArrayList<Movie> mList;
+    public static ArrayList<trailer> mList;
 
-    public CustomAdapter (Context context, ArrayList<Movie> list){
+    public TrailerCustomAdapter(Context context, ArrayList<trailer> list){
         mInflater = LayoutInflater.from(context);
         mContext = context;
         mList = list;
     }
 
-    public void add(Movie m){
+    public void add(trailer m){
         mList.add(m);
         notifyDataSetChanged();
     }
 
-    public void addAll(Movie[] m){
+    public void addAll(trailer[] m){
         mList.addAll(Arrays.asList(m));
         notifyDataSetChanged();
     }
 
-    public void replace(ArrayList<Movie> m){
+    public void replace(ArrayList<trailer> m){
         mList.clear();
         mList.addAll(m);
         notifyDataSetChanged();
@@ -63,17 +63,16 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = mInflater.inflate(R.layout.grid_custom_item, null);
+            view = mInflater.inflate(R.layout.trailer_list_item, null);
         } else {
             view = convertView;
         }
 
-        Movie cur = mList.get(position);
+        trailer cur = mList.get(position);
 
-        ImageView iv = (ImageView)view.findViewById(R.id.im);
-        Glide.with(mContext).load(cur.imageUri).into(iv);
-        TextView text = (TextView)view.findViewById(R.id.ti);
-        text.setText(cur.name);
+        TextView trailerName = (TextView)view.findViewById(R.id.trailer_name);
+
+        trailerName.setText(cur.name);
         return view;
     }
 }

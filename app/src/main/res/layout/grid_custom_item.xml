@@ -6,23 +6,25 @@
     >
     
     <ImageView
+        android:id="@+id/movie_poster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:scaleType="fitCenter"
-        android:id="@+id/im"
          />
     
     
     <TextView
-        android:id="@+id/ti"
+        android:id="@+id/movie_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:textSize="20sp"
         android:layout_margin="10dp"
+        android:text="dsaf"
+        android:textColor="#ffffff"
         android:background="#cc686868"
         />
     
