@@ -23,16 +23,13 @@ public class DetailsFragment extends Fragment {
     public static final String TAG = DetailsFragment.class.getSimpleName();
 
     public DetailsFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Movie m;
-
-
+        
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         // Inflate the layout for this fragment
         try{

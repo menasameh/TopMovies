@@ -25,7 +25,7 @@ import minasameh.topmovies.MainFragment;
 import minasameh.topmovies.R;
 import minasameh.topmovies.Settings;
 import minasameh.topmovies.adapters.MovieCustomAdapter;
-import minasameh.topmovies.main;
+import minasameh.topmovies.MainActivity;
 import minasameh.topmovies.model.Movie;
 
 
@@ -163,7 +163,7 @@ public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
         if(s!=null && s.size() > 0){
             adapter.replace(s);
         }
-        if(main.mTwoPane && s.size() > 0){
+        if(MainActivity.mTwoPane && s.size() > 0){
             Bundle arguments = new Bundle();
             arguments.putInt(MainFragment.MOVIE, 0);
 

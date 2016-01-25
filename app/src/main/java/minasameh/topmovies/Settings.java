@@ -30,7 +30,7 @@ public class Settings extends PreferenceActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        navigateUpTo(new Intent(this, main.class));
+        navigateUpTo(new Intent(this, MainActivity.class));
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {

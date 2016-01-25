@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     >
     
     <ImageView
@@ -14,8 +13,7 @@
         android:layout_marginTop="10dp"
         android:scaleType="fitCenter"
          />
-    
-    
+
     <TextView
         android:id="@+id/movie_name"
         android:layout_width="match_parent"
@@ -27,6 +25,5 @@
         android:textColor="#ffffff"
         android:background="#cc686868"
         />
-    
 
 </RelativeLayout>

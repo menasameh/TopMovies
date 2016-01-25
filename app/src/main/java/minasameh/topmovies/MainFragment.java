@@ -37,20 +37,19 @@ public class MainFragment extends Fragment {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                if(main.mTwoPane){
+                if(MainActivity.mTwoPane){
                     Bundle arguments = new Bundle();
                     arguments.putInt(MOVIE, position);
 
                     DetailsFragment fragment = new DetailsFragment();
                     fragment.setArguments(arguments);
-
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.movie_detail_container, fragment,
                                     DetailsFragment.TAG)
                             .commit();
                 }
                 else{
-                    Intent i = new Intent(getActivity(), details.class);
+                    Intent i = new Intent(getActivity(), DetailsActivity.class);
                     i.putExtra(MOVIE, position);
                     startActivity(i);
                 }

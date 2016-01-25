@@ -71,7 +71,7 @@ public class DbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE  " + DBContract.Movie.TABLE_NAME
-                +" ("+ DBContract.Movie._ID+" INTEGER PRIMARY UNIQUE KEY NOT NULL, "
+                +" ("+ DBContract.Movie._ID+" INTEGER PRIMARY KEY UNIQUE NOT NULL, "
                 + DBContract.Movie.NAME+" TEXT NOT NULL, "
                 + DBContract.Movie.RELEASE_DATE+" TEXT NOT NULL, "
                 + DBContract.Movie.DESCRIPTION+" TEXT NOT NULL, "

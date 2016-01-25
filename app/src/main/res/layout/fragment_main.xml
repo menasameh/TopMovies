@@ -7,7 +7,7 @@
 
     <GridView
         android:id="@+id/grid_view"
-        android:columnWidth="260dp"
+        android:columnWidth="150dp"
         android:numColumns="auto_fit"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
