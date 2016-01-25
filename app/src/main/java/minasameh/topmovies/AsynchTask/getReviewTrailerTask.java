@@ -1,13 +1,15 @@
 package minasameh.topmovies.AsynchTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,9 +23,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import minasameh.topmovies.BuildConfig;
 import minasameh.topmovies.R;
-import minasameh.topmovies.adapters.ReviewCustomAdapter;
-import minasameh.topmovies.adapters.TrailerCustomAdapter;
 import minasameh.topmovies.model.Movie;
 import minasameh.topmovies.model.review;
 import minasameh.topmovies.model.trailer;
@@ -31,7 +32,6 @@ import minasameh.topmovies.model.trailer;
 public class getReviewTrailerTask extends AsyncTask<Movie, Void, Void> {
 
         final String LOG_TAG = getReviewTrailerTask.class.getSimpleName();
-        String ApiKey="b7b092c2e175e13cf779c08c8eac31b2";
         Movie m;
         Activity view;
 
@@ -98,7 +98,7 @@ public class getReviewTrailerTask extends AsyncTask<Movie, Void, Void> {
                 final String APPID_PARAM = "api_key";
 
                 Uri builtUri = Uri.parse(trailersBaseURL).buildUpon()
-                        .appendQueryParameter(APPID_PARAM, ApiKey)
+                        .appendQueryParameter(APPID_PARAM, BuildConfig.apiKey)
                         .build();
 
                 java.net.URL url = new URL(builtUri.toString());
@@ -160,34 +160,52 @@ public class getReviewTrailerTask extends AsyncTask<Movie, Void, Void> {
 
         @Override
         protected Void doInBackground(Movie... params) {
-
             m = params[0];
-
             getObjects(m, true);
             getObjects(m, false);
-
             return null;
         }
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        ListView trailers = (ListView) view.findViewById(R.id.trailers_listview);
-        ListView reviews = (ListView) view.findViewById(R.id.reviews_listview);
+        LinearLayout trailers = (LinearLayout) view.findViewById(R.id.trailers_listview);
+        LinearLayout reviews = (LinearLayout) view.findViewById(R.id.reviews_listview);
 
-        trailers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.getContext().startActivity(
-                        new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.youtube.com/watch?v=" + m.trailers.get(position).key)));
+        if(m.trailers.size() > 0) {
+            view.findViewById(R.id.trailer_title).setVisibility(View.VISIBLE);
+            for (int i = 0; i < m.trailers.size(); i++) {
+                LayoutInflater inflater = (LayoutInflater) view.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View vi = inflater.inflate(R.layout.trailer_list_item, null);
+                TextView trailerName = (TextView) vi.findViewById(R.id.trailer_name);
+                trailerName.setText(m.trailers.get(i).name);
+                final String key = m.trailers.get(i).key;
+                vi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        view.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + key)).addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET));
+                    }
+                });
+                trailers.addView(vi);
             }
-        });
+        }
+        else{
+            view.findViewById(R.id.trailer_title).setVisibility(View.INVISIBLE);
+        }
 
-        TrailerCustomAdapter trailerCustomAdapter = new TrailerCustomAdapter(view, m.trailers);
-        ReviewCustomAdapter reviewCustomAdapter = new ReviewCustomAdapter(view, m.reviews);
-        trailers.setAdapter(trailerCustomAdapter);
-        reviews.setAdapter(reviewCustomAdapter);
-
-
+        if(m.reviews.size() > 0) {
+            view.findViewById(R.id.reviews_title).setVisibility(View.VISIBLE);
+            for (int i = 0; i < m.reviews.size(); i++) {
+                LayoutInflater inflater = (LayoutInflater) view.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View vi = inflater.inflate(R.layout.review_list_item, null);
+                TextView reviewAuthor = (TextView) vi.findViewById(R.id.author);
+                reviewAuthor.setText(m.reviews.get(i).author);
+                TextView reviewContent = (TextView) vi.findViewById(R.id.content);
+                reviewContent.setText(m.reviews.get(i).content);
+                reviews.addView(vi);
+            }
+        }
+        else{
+            view.findViewById(R.id.reviews_title).setVisibility(View.INVISIBLE);
+        }
     }
 }

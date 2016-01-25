@@ -99,17 +99,19 @@
                 android:textSize="@dimen/label_size"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/movie_description"
+                android:visibility="invisible"
                 />
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/trailers_listview"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-
+                android:layout_height="wrap_content"
                 android:layout_below="@id/trailer_title"
+                android:divider="?android:dividerHorizontal"
+                android:showDividers="middle"
+                android:orientation="vertical"
                 >
-
-            </ListView>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/reviews_title"
@@ -118,23 +120,20 @@
                 android:text="@string/reviews"
                 android:layout_marginTop="15dp"
                 android:textSize="@dimen/label_size"
+                android:visibility="invisible"
                 android:layout_below="@id/trailers_listview"
                 />
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/reviews_listview"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/reviews_title"
+                android:divider="?android:dividerHorizontal"
+                android:showDividers="middle"
+                android:orientation="vertical"
                 >
-            </ListView>
-
+            </LinearLayout>
         </RelativeLayout>
-
-
-
-
     </ScrollView>
-
-
 </RelativeLayout>

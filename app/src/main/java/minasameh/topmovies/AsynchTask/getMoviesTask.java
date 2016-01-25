@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import minasameh.topmovies.BuildConfig;
 import minasameh.topmovies.DetailsFragment;
 import minasameh.topmovies.MainFragment;
 import minasameh.topmovies.R;
@@ -32,7 +33,7 @@ import minasameh.topmovies.model.Movie;
 public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
 
     final String LOG_TAG = getMoviesTask.class.getSimpleName();
-    String ApiKey="b7b092c2e175e13cf779c08c8eac31b2";
+    //String ApiKey="b7b092c2e175e13cf779c08c8eac31b2";
     FragmentActivity mContext;
     MovieCustomAdapter adapter;
 
@@ -106,7 +107,7 @@ public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
 
             Uri builtUri = Uri.parse(Movies_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, order)
-                    .appendQueryParameter(APPID_PARAM, ApiKey)
+                    .appendQueryParameter(APPID_PARAM, BuildConfig.apiKey)
                     .build();
 
             java.net.URL url = new URL(builtUri.toString());
