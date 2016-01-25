@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -18,9 +20,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import minasameh.topmovies.DetailsFragment;
+import minasameh.topmovies.MainFragment;
 import minasameh.topmovies.R;
 import minasameh.topmovies.Settings;
 import minasameh.topmovies.adapters.MovieCustomAdapter;
+import minasameh.topmovies.main;
 import minasameh.topmovies.model.Movie;
 
 
@@ -28,10 +33,10 @@ public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
 
     final String LOG_TAG = getMoviesTask.class.getSimpleName();
     String ApiKey="b7b092c2e175e13cf779c08c8eac31b2";
-    Context mContext;
+    FragmentActivity mContext;
     MovieCustomAdapter adapter;
 
-    public getMoviesTask(Context mContext, MovieCustomAdapter adapter){
+    public getMoviesTask(FragmentActivity mContext, MovieCustomAdapter adapter){
         this.mContext= mContext;
         this.adapter = adapter;
     }
@@ -157,6 +162,18 @@ public class getMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
     protected void onPostExecute(ArrayList<Movie> s) {
         if(s!=null && s.size() > 0){
             adapter.replace(s);
+        }
+        if(main.mTwoPane && s.size() > 0){
+            Bundle arguments = new Bundle();
+            arguments.putInt(MainFragment.MOVIE, 0);
+
+            DetailsFragment fragment = new DetailsFragment();
+            fragment.setArguments(arguments);
+
+            mContext.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movie_detail_container, fragment,
+                            DetailsFragment.TAG)
+                    .commit();
         }
     }
 }

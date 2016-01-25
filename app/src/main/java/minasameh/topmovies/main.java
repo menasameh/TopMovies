@@ -7,39 +7,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class main extends AppCompatActivity {
-
-//    public static String MOVIE = "parce";
-//    MovieCustomAdapter adapter;
-
+    public static boolean mTwoPane;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        adapter = new MovieCustomAdapter(this, new ArrayList<Movie>());
-//        GridView grid = (GridView) findViewById(R.id.grid_view);
-//        grid.setAdapter(adapter);
-//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Intent i = new Intent(main.this, details.class);
-//                i.putExtra(MOVIE, position);
-//                startActivity(i);
-//            }
-//        });
-//        new DbHelper(this);
-//        if(util.getSortOrder(this)!=2)
-//            new getMoviesTask(this, adapter).execute();
-//        else{
-//            adapter.replace(new DbHelper(this).getMovies());
-//        }
+        if (findViewById(R.id.movie_detail_container) != null) {
+            mTwoPane = true;
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.movie_detail_container, new DetailsFragment(),
+                                DetailsFragment.TAG)
+                        .commit();
+            }
+        } else {
+            mTwoPane = false;
+        }
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if(util.getSortOrder(this)==2)
-//            adapter.replace(new DbHelper(this).getMovies());
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -10,7 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,6 +20,8 @@ import minasameh.topmovies.model.Movie;
 
 public class DetailsFragment extends Fragment {
 
+    public static final String TAG = DetailsFragment.class.getSimpleName();
+
     public DetailsFragment() {
         // Required empty public constructor
     }
@@ -28,11 +29,18 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Movie m;
+
+
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         // Inflate the layout for this fragment
-        Movie m;
         try{
-            int position = getActivity().getIntent().getExtras().getInt(MainFragment.MOVIE);
+            int position=0;
+            Bundle arguments = getArguments();
+            if (arguments != null) {
+                position = arguments.getInt(MainFragment.MOVIE);
+            }
             m = MovieCustomAdapter.mList.get(position);
             if(m==null){
                 getActivity().finish();
@@ -41,9 +49,7 @@ public class DetailsFragment extends Fragment {
             new getReviewTrailerTask(getActivity()).execute(m);
         }
         catch(Exception e){
-            Toast.makeText(getActivity(), "activity started from place other than main", Toast.LENGTH_SHORT).show();
-            getActivity().finish();
-            return null;
+            return new View(getActivity());
         }
         final Movie mMovie = m;
 
